@@ -1,0 +1,23 @@
+// Color variations
+$gray-900: #1B1B1B;
+
+// Color set
+$primary: #00385B;
+$secondary: #ff8500;
+$gray: #737373;
+$success: #18A369;
+$danger: #C15C5C;
+$warning: #ECAA6E;
+$info: #DDDDDD;
+$body-color: #1B1B1B;
+
+$theme-colors: (
+  "primary":          $primary,
+  "secondary":        $secondary,
+  "gray":             $gray,
+  "success":          $success,
+  "danger":           $danger,
+  "warning":          $warning,
+  "info":             $info,
+  "gray-900":         $gray-900
+);
