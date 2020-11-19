@@ -54,6 +54,16 @@
           :state="validateState('input-license-issuance-date-2')" 
           class="mb-3"
         ></b-form-datepicker>
+
+        <h4 class="font-weight-normal mt-3">Ημερομηνία γέννησης οδηγού</h4>
+        <b-form-datepicker
+          id="input-birth-date-2"
+          name="input-birth-date-2"
+          v-model="userVehicle.userBirthDate2"
+          v-validate="{ required: true }"
+          :state="validateState('input-birth-date-2')" 
+          class="mb-3"
+        ></b-form-datepicker>
       </template>
 
       <b-button variant="outline-primary" @click="hasAddtionalDriver = !hasAddtionalDriver">

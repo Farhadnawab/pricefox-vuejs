@@ -1,5 +1,5 @@
 <template>
-  <b-row class="first-step-section">
+  <b-row class="first-step-section" v-if="vehicleFound">
    
     <b-col>
       <h2 class="text-center">Βρήκαμε τα στοιχεία του οχήματoς σου.</h2>
@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-if="vehicleFound">
+          <tr>
             <th scope="row">
               {{ userVehicle.licensePlate | licensePlateFormat }}
             </th>
@@ -27,9 +27,6 @@
             <td>{{ car.cc }}</td>
             <td>{{ car.fuel }}</td>
             <td>{{ car.type }}</td>
-          </tr>
-          <tr v-else>
-            <td class="text-center" colspan="6">No Match Found..</td>
           </tr>
         </tbody>
         <tfoot>
@@ -72,7 +69,7 @@ export default {
   data() {
     return {
       car: {},
-      vehicleFound: true,
+      vehicleFound: false,
     }
   },
   watch: {
@@ -90,10 +87,11 @@ export default {
     searchVehicle() {
       this.getCarByLicensePlate(this.userVehicle.licensePlate).then(response => {
           if(!response.data.body.prods.cars || response.data.body.prods.cars.length === 0){
-            this.vehicleFound = false;
+            this.nextStep(false)
             return;
           }
 
+          this.vehicleFound = true;
           this.car = Object.assign({}, this.car,  response.data.body.prods.cars[0])
         })
         .catch(e => {

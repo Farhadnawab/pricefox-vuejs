@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="mb-3" v-if="userVehicle.used === 'yes'">
+    <div class="mb-3">
       <h4 class="font-weight-normal mb-3">Ημερομηνία πρώτης κυκλοφορίας</h4>
 
       <b-form-datepicker
-        id="input-vehicle-transfer-date"
-        name="input-vehicle-transfer-date"
-        v-model="userVehicle.transferDate"
+        id="input-vehicle-registration-date"
+        name="input-vehicle-registration-date"
+        v-model="userVehicle.registrationDate"
         v-validate="{ required: true }"
-        :state="validateState('input-vehicle-transfer-date')" 
+        :state="validateState('input-vehicle-registration-date')" 
       ></b-form-datepicker>
     </div>
 
@@ -23,7 +23,19 @@
         button-variant="primary"
         name="btn-radios-vehicle-used"
       ></b-form-radio-group>
-    </b-form-group>               
+    </b-form-group> 
+
+    <div class="mb-3" v-if="userVehicle.used === 'no'">
+      <h4 class="font-weight-normal mb-3">Ημερομηνία μεταβίβασης</h4>
+
+      <b-form-datepicker
+        id="input-vehicle-transfer-date"
+        name="input-vehicle-transfer-date"
+        v-model="userVehicle.transferDate"
+        v-validate="{ required: true }"
+        :state="validateState('input-vehicle-transfer-date')" 
+      ></b-form-datepicker>
+    </div>              
   </div>
 </template>
 

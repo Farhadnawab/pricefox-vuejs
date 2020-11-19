@@ -48,10 +48,12 @@ export default {
 
         licensePlate: '',
         transferDate: '',
+        registrationDate: '',
         used: '',
         licenseIssuanceDate: '',
         licenseIssuanceDate2: '',
         userBirthDate: '',
+        userBirthDate2: '',
         userPostalCode: '',
         userEmailAddress: '',
       }
