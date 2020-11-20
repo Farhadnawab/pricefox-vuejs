@@ -1,10 +1,21 @@
 <template>
   <div class="form-steps-wrapper">
-    <first-step
+
+    <b-modal
+      hide-header
+      hide-footer
+      no-close-on-backdrop
+      no-close-on-esc
+      size="xl"
+      centered
+      v-model="steps.modalStep1Show"
       v-if="steps.active === 1"
-      :steps.sync="steps"
-      :userVehicle.sync="userVehicle"
-    />
+    >
+      <first-step
+        :steps.sync="steps"
+        :userVehicle.sync="userVehicle"
+      />
+    </b-modal>
     <second-step-a
       v-if="steps.active === 2 && !steps.customVehicle"
       :steps.sync="steps"
@@ -35,6 +46,7 @@ export default {
       steps: {
         active: 1, //possible values 1, 2, 3
         customVehicle: false,
+        modalStep1Show: true,
       },
       userVehicle: {
         make: '',

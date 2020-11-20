@@ -1,3 +1,5 @@
+$font-family-base: 'Roboto', sans-serif;
+
 // Color variations
 $gray-900: #1B1B1B;
 
@@ -21,3 +23,9 @@ $theme-colors: (
   "info":             $info,
   "gray-900":         $gray-900
 );
+
+// Buttons
+$btn-font-size: 0.875rem;
+$btn-font-weight: 500;
+$btn-padding-y: 0.9rem;
+$btn-padding-x: 1.5rem;
