@@ -1,0 +1,40 @@
+:root {
+  --gray: #737373;
+  --brand-gray: #312F2E;
+  --gray-600: #CCCBC8;
+  --primary: #00385B;
+  --secondary: #ff8500;
+  --success: #18A369;
+  --info: #DDDDDD;
+  --warning: #ECAA6E;
+  --danger: #C15C5C;
+  --gray-900: #1B1B1B;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+$font-family-base: 'Roboto', sans-serif;
+
+// Color variations
+$gray-900: var(--gray-900);
+
+// Color set
+$primary: var(--primary);
+$secondary: var(--secondary);
+$gray: var(--gray);
+$gray-600: var(--gray-600);
+$brand-gray: var(--brand-gray);
+$success: var(--success);
+$danger: var(--danger);
+$warning: var(--warning);
+$info: var(--info);
+$body-color: var(--gray-900);
+
+// Buttons
+$btn-font-size: 0.875rem;
+$btn-font-weight: 500;
+$btn-padding-y: 0.9rem;
+$btn-padding-x: 1.5rem;

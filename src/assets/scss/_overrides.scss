@@ -1,31 +1,8 @@
-$font-family-base: 'Roboto', sans-serif;
-
-// Color variations
-$gray-900: #1B1B1B;
-
-// Color set
-$primary: #00385B;
-$secondary: #ff8500;
-$gray: #737373;
-$success: #18A369;
-$danger: #C15C5C;
-$warning: #ECAA6E;
-$info: #DDDDDD;
-$body-color: #1B1B1B;
-
-$theme-colors: (
-  "primary":          $primary,
-  "secondary":        $secondary,
-  "gray":             $gray,
-  "success":          $success,
-  "danger":           $danger,
-  "warning":          $warning,
-  "info":             $info,
-  "gray-900":         $gray-900
-);
-
-// Buttons
-$btn-font-size: 0.875rem;
-$btn-font-weight: 500;
-$btn-padding-y: 0.9rem;
-$btn-padding-x: 1.5rem;
+.mx-datepicker {
+  display: block;
+  width: auto;
+  max-width: 340px;
+}
+.mx-icon-calendar, .mx-icon-clear {
+  right: 12px;
+}

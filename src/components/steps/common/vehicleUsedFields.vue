@@ -1,50 +1,64 @@
 <template>
-  <div>
-    <div class="mb-3">
-      <h4 class="font-weight-normal mb-3">Ημερομηνία πρώτης κυκλοφορίας</h4>
+  <div class="vehicle-used-fields">
 
-      <b-form-datepicker
-        id="input-vehicle-registration-date"
+    <div class="form-group">
+      <div class="font-weight-medium mb-03">
+        Ημερομηνία πρώτης κυκλοφορίας
+        <img :src="require('@/assets/images/question.svg')" />
+      </div>
+
+      <date-picker
+        default-error-message=""
         name="input-vehicle-registration-date"
+        :value="userVehicle.registrationDate"
         v-model="userVehicle.registrationDate"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-registration-date')" 
-      ></b-form-datepicker>
+        :required="true"
+      ></date-picker>
     </div>
 
-    <h4 class="font-weight-normal mb-3">Το όχημα είναι μεταχειρισμένο ?</h4>
+    <div class="form-group">
+      <div class="font-weight-medium mb-03">
+        Το όχημα είναι μεταχειρισμένο
+        <img :src="require('@/assets/images/question.svg')" />
+      </div>
 
-    <b-form-group>
-      <b-form-radio-group
-        id="btn-radios-vehicle-used"
-        v-model="userVehicle.used"
-        :options="vehicleUsedOptions"
-        buttons
-        button-variant="primary"
+      <options-field
+        class="form-radio-type-1"
+        :required="true"
         name="btn-radios-vehicle-used"
-      ></b-form-radio-group>
-    </b-form-group> 
+        :options="vehicleUsedOptions"
+        :max-selected="1"
+        default-error-message=""
+        v-model="userVehicle.used"
+      />
+    </div>
+    <div class="form-group" v-if="userVehicle.used === 'no'">
+      <div class="font-weight-medium mb-03">
+        Ημερομηνία μεταβίβασης
+        <img :src="require('@/assets/images/question.svg')" />
+      </div>
 
-    <div class="mb-3" v-if="userVehicle.used === 'no'">
-      <h4 class="font-weight-normal mb-3">Ημερομηνία μεταβίβασης</h4>
-
-      <b-form-datepicker
-        id="input-vehicle-transfer-date"
+      <date-picker
+        default-error-message=""
         name="input-vehicle-transfer-date"
+        :value="userVehicle.transferDate"
         v-model="userVehicle.transferDate"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-transfer-date')" 
-      ></b-form-datepicker>
+        :required="true"
+      ></date-picker>
     </div>              
   </div>
 </template>
 
 <script>
-import mixinCommon from '@/helpers/mixinCommon'
+import datePicker from '@/components/common/form/fields/DateField'
+import optionsField from '@/components/common/form/fields/OptionsField'
 
 export default {
   name: "vehicleUsedFields",
-  mixins: [mixinCommon],
+  components: {
+    datePicker,
+    optionsField
+  },
   props: {
     userVehicle: {
       type: Object,
@@ -54,9 +68,14 @@ export default {
   data() {
     return {
       vehicleUsedOptions: [
-        { text: 'NAI', value: 'no' },
-        { text: 'OXI', value: 'yes' },
+        { label: 'NAI', value: 'no' },
+        { label: 'OXI', value: 'yes' },
       ],
+    }
+  },
+  provide() {
+    return {
+      $validator: this.$validator,
     }
   },
   inject: ['$validator']

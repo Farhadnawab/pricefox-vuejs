@@ -1,59 +1,84 @@
 <template>
-  <div>
-    <h4 class="font-weight-normal mt-3">Μάρκα </h4>
-    <b-form-select 
-      id="input-vehicle-make"
-      name="input-vehicle-make"
-      v-model="userVehicle.make" 
-      :options="vehicleMakeOptions"
-      v-validate="{ required: true }"
-      :state="validateState('input-vehicle-make')" 
-      @change="populateModelData"
-    ></b-form-select>
+  <div class="vehicle-detail-fields">    
+    <div class="form-group">
+      <div class="font-weight-medium mb-03">
+        Μάρκα
+        <img :src="require('@/assets/images/question.svg')" />
+      </div>
+      
+      <select-field
+        :required="true"
+        default-error-message=""
+        name="input-vehicle-make"
+        v-model="userVehicle.make"
+        :options="vehicleMakeOptions"
+        @input="populateModelData"
+      ></select-field>
+    </div>
 
     <template v-if="userVehicle.make.length > 0">
       <hr />
 
-      <h4 class="font-weight-normal mt-4">Μοντέλο</h4>
-      <b-form-select 
-        id="input-vehicle-model"
-        name="input-vehicle-model"
-        v-model="userVehicle.model" 
-        :options="vehicleModelOptions"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-model')" 
-        @change="populateFuelTypeData"
-      ></b-form-select>
+      <div class="form-group">
+        <div class="font-weight-medium mb-03">
+          Μοντέλο
+          <img :src="require('@/assets/images/question.svg')" />
+        </div>
+        
+        <select-field
+          :required="true"
+          default-error-message=""
+          name="input-vehicle-model"
+          v-model="userVehicle.model"
+          :options="vehicleModelOptions"
+          @input="populateFuelTypeData"
+        ></select-field>
+      </div>
 
-      <h4 class="font-weight-normal mt-3">Είδος καυσίμου</h4>
-      <b-form-select 
-        id="input-vehicle-fuel"
-        name="input-vehicle-fuel"
-        v-model="userVehicle.fuel" 
-        :options="vehicleFuelOptions"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-fuel')" 
-      ></b-form-select>
+      <div class="form-group">
+        <div class="font-weight-medium mb-03">
+          Είδος καυσίμου
+          <img :src="require('@/assets/images/question.svg')" />
+        </div>
+        
+        <select-field
+          :required="true"
+          default-error-message=""
+          name="input-vehicle-fuel"
+          v-model="userVehicle.fuel"
+          :options="vehicleFuelOptions"
+        ></select-field>
+      </div>
 
-      <h4 class="font-weight-normal mt-3">Κυβικά (CC)</h4>
-      <b-form-select 
-        id="input-vehicle-cc"
-        name="input-vehicle-cc"
-        v-model="userVehicle.cc" 
-        :options="vehicleCCOptions"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-cc')" 
-      ></b-form-select>
+      <div class="form-group">
+        <div class="font-weight-medium mb-03">
+          Κυβικά (CC)
+          <img :src="require('@/assets/images/question.svg')" />
+        </div>
+        
+        <select-field
+          :required="true"
+          default-error-message=""
+          name="input-vehicle-cc"
+          v-model="userVehicle.cc"
+          :options="vehicleCCOptions"
+        ></select-field>
+      </div>
 
-      <h4 class="font-weight-normal mt-3">Έκδοση μοντέλου</h4>
-      <b-form-select 
-        id="input-vehicle-type"
-        name="input-vehicle-type"
-        v-model="userVehicle.type" 
-        :options="vehicleTypeOptions"
-        v-validate="{ required: true }"
-        :state="validateState('input-vehicle-type')" 
-      ></b-form-select>
+      <div class="form-group">
+        <div class="font-weight-medium mb-03">
+          Έκδοση μοντέλου
+          <img :src="require('@/assets/images/question.svg')" />
+        </div>
+        
+        <select-field
+          :required="true"
+          default-error-message=""
+          name="input-vehicle-type"
+          v-model="userVehicle.type"
+          :options="vehicleTypeOptions"
+        ></select-field>
+      </div>
     </template>
   </div>
 </template>
@@ -61,10 +86,14 @@
 <script>
 import { mapActions } from 'vuex'
 import mixinCommon from '@/helpers/mixinCommon'
+import selectField from '@/components/common/form/fields/SelectField'
 
 export default {
   name: "vehicleDetailFields",
   mixins: [mixinCommon],
+  components: {
+    selectField
+  },
   props: {
     userVehicle: {
       type: Object,
@@ -104,14 +133,14 @@ export default {
       'getCarFuelTypeByCarMakerModel'
     ]),
     populateModelData(value) {
-      this.vehicleModelOptions.splice(1) // avoid duplication
-
       if(!value)
         return
       
       this.getCarModelsByCarMaker(value).then(results => {
         if(!results.data.model)
           return
+
+        this.vehicleModelOptions.splice(1) // avoid duplication
 
         // populate makers dropdown
         Object.values(results.data.model).forEach(e => {
@@ -120,8 +149,6 @@ export default {
       });
     },
     populateFuelTypeData(value) {
-      this.vehicleFuelOptions.splice(1) // avoid duplication
-
       if(!value)
         return
       
@@ -131,6 +158,8 @@ export default {
       }).then(results => {
         if(!results.data.fuelType)
           return
+
+        this.vehicleFuelOptions.splice(1) // avoid duplication
 
         // populate makers dropdown
         Object.values(results.data.fuelType).forEach(e => {
@@ -154,3 +183,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.vehicle-detail-fields {
+  margin-top: 1.5rem;
+  max-width: 340px;
+}
+</style>

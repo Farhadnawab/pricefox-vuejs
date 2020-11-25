@@ -1,25 +1,35 @@
 <template>
   <div class="page-home">
 
-    <b-form class="text-center" @submit.stop.prevent="onSubmit">
+    <form 
+      :class="{'is-invalid': isInvalid}"
+      class="text-center" 
+      @submit.stop.prevent="onSubmit"
+    >
       <h2>Ασφάλισε το αυτοκίνητό σου και 
       εξοικονόμησε έως και 96€ ετησίως</h2>
       <p>Σύγκρινε προσφορές από τις καλύτερες ασφαλιστικές σε 1 λεπτό</p>
 
-      <b-form-input
-          id="input-license-plate"
-          name="input-license-plate"
-          v-model="licensePlate" 
-          placeholder="Enter your vehicle plate number e.g ipo-3245"
-          v-validate="{ required: true,  regex: /^[A-Ω]{3}-\d{4}$/ }"
-          :state="validateState('input-license-plate')" 
-          class="mx-auto"
-          style="max-width: 500px;"
-      ></b-form-input>
-      <b-button type="submit" block variant="secondary" class="text-white mt-4 mx-auto" style="max-width: 250px;">
+      <div class="form-group">
+        <input
+            id="input-license-plate"
+            name="input-license-plate"
+            v-model="licensePlate" 
+            placeholder="Enter your vehicle plate number e.g ipo-3245"
+            v-validate="{ required: true,  regex: /^[A-Ω]{3}-\d{4}$/ }"
+            :state="validateState('input-license-plate')" 
+            class="page-home--plate-input form-control"
+            type="text"
+        />
+      </div>
+      <button 
+        type="submit" 
+        class="btn btn-secondary page-home--button" 
+        style="max-width: 250px;"
+      >
           προσφορές
-      </b-button>
-    </b-form>
+      </button>
+    </form>
 
     
   </div>
@@ -35,7 +45,8 @@ export default {
   },
   data() {
     return {
-      licensePlate: ''
+      licensePlate: '',
+      isInvalid: false,
     }
   },
   methods: {
@@ -43,6 +54,7 @@ export default {
       
       this.$validator.validateAll().then(result => {
         if (!result) {
+          this.isInvalid = true;
           return;
         }
 
@@ -56,3 +68,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.page-home--plate-input {
+  margin: 1rem auto 0;
+  max-width: 500px;
+}
+.page-home--button {
+  width: 100%;
+  max-widtH: 250px;
+  margin: 1rem auto 0;
+}
+</style>

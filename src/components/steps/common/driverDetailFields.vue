@@ -1,85 +1,121 @@
 <template>
   <div>
-    <h3 class="mt-5">Στοιχεία οδηγού</h3>
-    <h4 class="font-weight-normal mt-3">Ημερομηνία έκδοσης διπλώματος</h4>
-    
-    <b-form-datepicker
-      id="input-license-issuance-date"
-      name="input-license-issuance-date"
-      v-model="userVehicle.licenseIssuanceDate"
-      v-validate="{ required: true }"
-      :state="validateState('input-license-issuance-date')" 
-    ></b-form-datepicker>
+    <div class="driver-detail-fields">
+      <h3 class="mb-1">Στοιχεία οδηγού</h3>
 
-    <template v-if="userVehicle.licenseIssuanceDate.length > 0">
-      <h4 class="font-weight-normal mt-3">Ημερομηνία γέννησης οδηγού</h4>
-      <b-form-datepicker
-        id="input-birth-date"
-        name="input-birth-date"
-        v-model="userVehicle.userBirthDate"
-        v-validate="{ required: true }"
-        :state="validateState('input-birth-date')" 
-      ></b-form-datepicker>
-      
-      <h4 class="font-weight-normal mt-3">Ταχυδρομικός κώδικας</h4>
-      <b-form-input
-        id="input-postal-code"
-        name="input-postal-code"
-        v-model="userVehicle.userPostalCode"
-        v-validate="{ required: true }"
-        :state="validateState('input-postal-code')" 
-      ></b-form-input>
-      
-      <h4 class="font-weight-normal mt-3">E-mail (προεραιτικό)</h4>
-      <b-form-input 
-        id="input-email-address"
-        name="input-email-address"
-        v-model="userVehicle.userEmailAddress"
-        v-validate="{ required: true }"
-        :state="validateState('input-email-address')" 
-        type="email"
-      ></b-form-input>
+      <div class="form-group">
+        <div class="font-weight-medium mb-03">
+          Ημερομηνία έκδοσης διπλώματος
+          <img :src="require('@/assets/images/question.svg')" />
+        </div>
+        
+        <date-picker
+          default-error-message=""
+          name="input-license-issuance-date"
+          :value="userVehicle.licenseIssuanceDate"
+          v-model="userVehicle.licenseIssuanceDate"
+          :required="true"
+        ></date-picker>
+      </div>
 
-      <p class="mt-2">Συμπλήρωσε το e-mail σου και αν το επιθυμείς θα μοιραζόμαστε μαζί σου τις καλύτερες προσφορές της αγοράς για σένα.</p>
+      <template v-if="userVehicle.licenseIssuanceDate">
+        <div class="form-group">
+          <div class="font-weight-medium mb-03">
+            Ημερομηνία γέννησης οδηγού
+            <img :src="require('@/assets/images/question.svg')" />
+          </div>
+          <date-picker
+            default-error-message=""
+            name="input-birth-date"
+            :value="userVehicle.userBirthDate"
+            v-model="userVehicle.userBirthDate"
+            :required="true"
+          ></date-picker>
+        </div>
 
-      <template v-if="hasAddtionalDriver">
-        <hr/>
+        <div class="form-group">
+          <div class="font-weight-medium mb-03">
+            Ταχυδρομικός κώδικας
+            <img :src="require('@/assets/images/question.svg')" />
+          </div>
+          <text-field
+            default-error-message=""
+            :required="true"
+            name="input-postal-code"
+            v-model="userVehicle.userPostalCode"
+          ></text-field>
+        </div>
+        
+        <div class="form-group">
+          <div class="font-weight-medium mb-03">
+            E-mail (προεραιτικό)
+            <img :src="require('@/assets/images/question.svg')" />
+          </div>
+          <text-field
+            default-error-message=""
+            :required="true"
+            name="input-email-address"
+            type="email"
+            v-model="userVehicle.userEmailAddress"
+          ></text-field>
+        </div>
 
-        <h4 class="font-weight-normal mt-3">Ημερομηνία Έκδοσης διπλώματος επιπρόσθετου οδηγού</h4>
-        <b-form-datepicker
-          id="input-license-issuance-date-2"
-          name="input-license-issuance-date-2"
-          v-model="userVehicle.licenseIssuanceDate2"
-          v-validate="{ required: true }"
-          :state="validateState('input-license-issuance-date-2')" 
-          class="mb-3"
-        ></b-form-datepicker>
+        <p class="driver-detail-fields--description">Συμπλήρωσε το e-mail σου και αν το επιθυμείς θα μοιραζόμαστε μαζί σου τις καλύτερες προσφορές της αγοράς για σένα.</p>
 
-        <h4 class="font-weight-normal mt-3">Ημερομηνία γέννησης οδηγού</h4>
-        <b-form-datepicker
-          id="input-birth-date-2"
-          name="input-birth-date-2"
-          v-model="userVehicle.userBirthDate2"
-          v-validate="{ required: true }"
-          :state="validateState('input-birth-date-2')" 
-          class="mb-3"
-        ></b-form-datepicker>
+        <template v-if="hasAddtionalDriver">
+          <hr/>
+
+          <div class="form-group">
+            <div class="font-weight-medium mb-03">
+              Ημερομηνία Έκδοσης διπλώματος επιπρόσθετου οδηγού
+              <img :src="require('@/assets/images/question.svg')" />
+            </div>
+            <date-picker
+              default-error-message=""
+              name="input-license-issuance-date-2"
+              :value="userVehicle.licenseIssuanceDate2"
+              v-model="userVehicle.licenseIssuanceDate2"
+              :required="true"
+            ></date-picker>
+          </div>
+          
+          <div class="form-group">
+            <div class="font-weight-medium mb-03">
+              Ημερομηνία γέννησης οδηγού
+              <img :src="require('@/assets/images/question.svg')" />
+            </div>
+            <date-picker
+              default-error-message=""
+              name="input-birth-date-2"
+              :value="userVehicle.userBirthDate2"
+              v-model="userVehicle.userBirthDate2"
+              :required="true"
+            ></date-picker>
+          </div>
+        </template>
+
+        <button type="button" class="btn btn-outline-primary" @click="hasAddtionalDriver = !hasAddtionalDriver">
+          Προσθήκη επιπλέον οδηγού
+        </button>
+
       </template>
-
-      <b-button variant="outline-primary" @click="hasAddtionalDriver = !hasAddtionalDriver">
-        Προσθήκη επιπλέον οδηγού
-      </b-button>
-
-      <p class="mt-2">Πατώντας το "Επόμενο Βήμα" συμφωνείτε με τους Όρους χρήσης & Πολιτική Απορρήτου.</p>
-    </template>
+    </div>
+    <br/>
+    <p class="driver-detail-fields--description">Πατώντας το "Επόμενο Βήμα" συμφωνείτε με τους Όρους χρήσης & Πολιτική Απορρήτου.</p>
   </div>
 </template>
 
 <script>
 import mixinCommon from '@/helpers/mixinCommon'
+import datePicker from '@/components/common/form/fields/DateField'
+import TextField from '@/components/common/form/fields/TextField'
 
 export default {
   name: "driverDetailFields",
+  components: {
+    datePicker,
+    TextField
+  },
   mixins: [mixinCommon],
   props: {
     userVehicle: {
@@ -92,6 +128,22 @@ export default {
       hasAddtionalDriver: false,
     }
   },
+  provide() {
+    return {
+      $validator: this.$validator,
+    }
+  },
   inject: ['$validator']
 };
 </script>
+
+<style lang="scss" scoped>
+.driver-detail-fields {
+  margin-top: 2.5rem;
+  max-width: 340px;
+}
+.driver-detail-fields--description {
+  color: var(--gray);
+  font-size: 0.875rem;
+}
+</style>

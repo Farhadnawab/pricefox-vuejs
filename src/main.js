@@ -3,7 +3,6 @@ import App from '@/App'
 import router from '@/router'
 import store from '@/store'
 import VeeValidate from 'vee-validate'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import '@/assets/scss/app.scss'
 
 Vue.config.productionTip = false
@@ -16,11 +15,6 @@ Vue.use(VeeValidate, {
   // This is not required but avoids possible naming conflicts
   errorBagName: 'veeErrors'
 })
-
-// Install BootstrapVue
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
 
 new Vue({
   store,

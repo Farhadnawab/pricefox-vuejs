@@ -1,9 +1,9 @@
 <template>
   <div id="app">
 
-    <b-container class="mt-3">
+    <div class="container mt-3">
       <router-view />
-    </b-container>
+    </div>
   </div>
 </template>
 

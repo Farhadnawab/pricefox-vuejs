@@ -1,25 +1,30 @@
 <template>
   <div>
-    <b-card 
-      title="Σύνοψη" 
-      sub-title="Οδηγός και όχημα"
-    >
-      <b-card-text>
-        <b-list-group class="my-4">
-          <b-list-group-item variant="info" class="d-flex align-items-center">
-            <b-avatar class="mr-3" variant="gray" :text="userVehicle.make.substring(0,2)"></b-avatar>
-            <span class="mr-auto">
-              <b class="text-gray-900">{{ userVehicle.make }}</b><br/>
-              <span>{{ userVehicle.cc }} {{ userVehicle.type }}</span>
-            </span>
-          </b-list-group-item>
-        </b-list-group>
+    <div class="panel panel-default">
+    <div class="panel-body">
+      <h5>Σύνοψη</h5>
+      <div class="text-gray">Οδηγός και όχημα</div>
 
-        Ημ/μηνία έκδοσης διπλώματος: {{ userVehicle.licenseIssuanceDate | dateFormat }}
-        <br/>
-        Ταχυδρομικος κωδικας: {{ userVehicle.userPostalCode }}
-      </b-card-text>
-    </b-card>
+      <div class="media media-panel">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="https://via.placeholder.com/45x45" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <b>{{ userVehicle.make }}</b>
+          <br/>
+          <span class="text-gray">{{ userVehicle.cc }} {{ userVehicle.type }}</span>
+        </div>
+      </div>
+      
+      <br/>
+      
+      <span class="text-gray">Ημ/μηνία έκδοσης διπλώματος:</span> {{ userVehicle.licenseIssuanceDate | dateFormat }}
+      <br/>
+      <span class="text-gray">Ταχυδρομικος κωδικας:</span> {{ userVehicle.userPostalCode }}
+    </div>
+    </div>
   </div>
 </template>
 

@@ -1,28 +1,29 @@
 <template>
   <div class="form-steps-wrapper">
 
-    <b-modal
-      hide-header
-      hide-footer
-      no-close-on-backdrop
-      no-close-on-esc
-      size="xl"
-      centered
-      v-model="steps.modalStep1Show"
+    <!-- Modal -->
+    <modal
+      class="save-results"
+      :hidden="!steps.modalStep1Show"
+      :prevent-closing="true"
       v-if="steps.active === 1"
     >
-      <first-step
+      <first-step-modal
         :steps.sync="steps"
         :userVehicle.sync="userVehicle"
       />
-    </b-modal>
-    <second-step-a
-      v-if="steps.active === 2 && !steps.customVehicle"
+    </modal>
+
+    <!-- First Step - Scenario A -->
+    <first-step-scenario-a
+      v-if="!steps.modalStep1Show && !steps.customVehicle"
       :steps.sync="steps"
       :userVehicle.sync="userVehicle"
     />
-    <second-step-b
-      v-if="steps.active === 2 && steps.customVehicle"
+
+    <!-- First Step - Scenario B -->
+    <first-step-scenario-b
+      v-else
       :steps.sync="steps"
       :userVehicle.sync="userVehicle"
     />
@@ -30,16 +31,18 @@
 </template>
 
 <script>
-import FirstStep from '@/components/steps/FirstStep'
-import SecondStepA from '@/components/steps/SecondStepA'
-import SecondStepB from '@/components/steps/SecondStepB'
+import Modal from '@/components/common/modal/Modal'
+import FirstStepModal from '@/components/steps/FirstStepModal'
+import FirstStepScenarioA from '@/components/steps/FirstStepScenarioA'
+import FirstStepScenarioB from '@/components/steps/FirstStepScenarioB'
 
 export default {
   name: "formSteps",
   components: {
-    FirstStep,
-    SecondStepA,
-    SecondStepB
+    Modal,
+    FirstStepModal,
+    FirstStepScenarioA,
+    FirstStepScenarioB
   },
   data() {
     return {
@@ -47,6 +50,7 @@ export default {
         active: 1, //possible values 1, 2, 3
         customVehicle: false,
         modalStep1Show: true,
+        vehicleFound: false,
       },
       userVehicle: {
         make: '',
