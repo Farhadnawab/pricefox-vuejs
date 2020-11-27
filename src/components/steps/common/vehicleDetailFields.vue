@@ -124,6 +124,7 @@ export default {
         { value: '', text: 'Please select an option' },
         { value: '1000', text: '1000' },
         { value: '1200', text: '1200' },
+        { value: '1355', text: '1355' },
         { value: '1600', text: '1600' },
         { value: '1800', text: '1800' },
       ],

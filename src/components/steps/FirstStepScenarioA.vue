@@ -62,6 +62,16 @@
             </table>
           </div>
 
+          <!-- Vehicle Details -->
+          <vehicle-detail-fields
+            :userVehicle="userVehicle"    
+            class="visible-xs"      
+          />
+
+          <br
+            class="visible-xs"
+          />
+
           <!-- Vehicle Used -->
           <vehicle-used-fields
             :userVehicle="userVehicle"          
@@ -121,6 +131,7 @@ import vehicleUsedFields from '@/components/steps/common/vehicleUsedFields.vue';
 import vehicleReviewSection from '@/components/steps/common/vehicleReviewSection.vue';
 import titleSection from '@/components/steps/common/titleSection.vue';
 import infoSponsorsSection from '@/components/steps/common/infoSponsorsSection.vue';
+import vehicleDetailFields from '@/components/steps/common/vehicleDetailFields.vue';
 
 export default {
   name: 'firstStepScenarioA',
@@ -129,7 +140,8 @@ export default {
     vehicleUsedFields,
     vehicleReviewSection,
     titleSection,
-    infoSponsorsSection
+    infoSponsorsSection,
+    vehicleDetailFields
   },
   mixins: [mixinCommon],
   props: {

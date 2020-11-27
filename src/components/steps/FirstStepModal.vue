@@ -123,7 +123,7 @@ export default {
       this.$set(this.steps, 'customVehicle', isYourVehicle ? false: true);
       
       if(isYourVehicle) { // store vehicle data
-        Object.keys(this.car).forEach(e => { this.$set(this.userVehicle, e, this.car[e]) })
+        Object.keys(this.car).forEach(e => { this.$set(this.userVehicle, e, this.car[e].toLowerCase()) })
       } else { //empty all fields
         Object.keys(this.userVehicle).forEach(e => { if(e !== 'licensePlate') this.$set(this.userVehicle, e, ''); })
         this.$set(this.steps, 'vehicleFound', false);

@@ -27,7 +27,7 @@
       :data-index="index"
       :id="id+'__'+option.value"
       :key="option.value"
-      :value="option.value"
+      :value="option.value.toLowerCase()"
       class="form-input-select__option"
       v-for="(option, index) in options"
     >
