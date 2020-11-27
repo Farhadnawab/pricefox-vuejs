@@ -9,29 +9,35 @@
     </div>
 
     <table class="first-step-modal--table table">
-      <thead>
-        <tr>
-          <th width="170" scope="col">Πινακιδα</th>
-          <th scope="col">Μάρκα</th>
-          <th scope="col">Μοντελο</th>
-          <th scope="col">Κυβικα</th>
-          <th scope="col">Καυσιμο</th>
-          <th scope="col">Εκδοση</th>
-        </tr>
-      </thead>
       <tbody>
         <tr>
           <td scope="row">
+            <div class="title">Πινακιδα</div>
             <div class="first-step-modal--plate">
               <img :src="require('@/assets/images/plate.png')" />
               {{ userVehicle.licensePlate | licensePlateFormat }}
             </div>
           </td>
-          <td>{{ car.make }}</td>
-          <td>{{ car.model }}</td>
-          <td>{{ car.cc }}</td>
-          <td>{{ car.fuel }}</td>
-          <td>{{ car.type }}</td>
+          <td>
+            <div class="title">Μάρκα</div>
+            {{ car.make }}
+          </td>
+          <td>
+            <div class="title">Μοντελο</div>
+            {{ car.model }}
+          </td>
+          <td>
+            <div class="title">Κυβικα</div>
+            {{ car.cc }}
+          </td>
+          <td>
+            <div class="title">Καυσιμο</div>
+            {{ car.fuel }}
+          </td>
+          <td>
+            <div class="title">Εκδοση</div>
+            {{ car.type }}
+          </td>
         </tr>
       </tbody>
       <tfoot class="text-center">
@@ -53,6 +59,11 @@
         <button type="button" class="btn btn-secondary" @click="nextStep(true)" v-if="steps.vehicleFound">Ναι, είναι</button>
         <button type="button" class="btn btn-default" @click="nextStep(false)">Όχι, θα το καταχωρήσω εγώ</button>
       </div>
+    </div>
+
+    <div class="first-step-modal--info-mobile hidden-sm">
+      <img :src="require('@/assets/images/question.svg')" />
+      Πώς βρήκατε τα στοιχεία του οχήματος μου;
     </div>
 
   </div>
@@ -138,53 +149,6 @@ export default {
   }
 }
 
-.first-step-modal--table {
-  max-width: 570px;
-  margin: 1.5rem auto;
-  border: 1px solid var(--info);
-
-  thead th {
-    border-bottom: 0;
-    padding-top: 1.5rem;
-    padding-bottom: 0.375rem;
-    color: var(--gray);
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-  thead th:first-child, tbody td:first-child {
-    border-right: 1px solid var(--info);
-  }
-  th, td {
-    border: 0;
-    padding: 0.75rem;
-  }
-  tbody tr:first-child td {
-    padding-top: 0.375rem;
-  }
-  tbody tr:last-child td {
-    padding-bottom: 1.5rem;
-  }
-  tfoot tr td {
-    border-top: 1px solid var(--info);
-    font-size: 0.87rem;
-    color: var(--gray);
-  }
-  tfoot img {
-    margin-right: 0.25rem;
-  }
-}
-
-.first-step-modal--plate {
-  border-radius: 4px;
-  border: 1px solid var(--info);
-  display: flex;
-  align-items: center;
-
-  > img {
-    margin-right: 0.5rem;
-  }
-}
-
 .first-step--action {
   text-align: center;
 
@@ -194,19 +158,86 @@ export default {
     margin-bottom: 1rem;
   }
   .first-step--action-buttons {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
   }
   .first-step--action-buttons .btn-default {
     margin-top: 1rem;
+  }
+}
+
+.first-step-modal--info-mobile {
+  margin-top: 2rem;
+  text-align: center;
+}
+</style>
+
+<style lang="scss">
+.first-step-modal--table {
+  max-width: 570px;
+  margin: 1.5rem auto;
+  border: 1px solid var(--info);
+
+  tbody .title {
+    border-bottom: 0;
+    padding-bottom: 0.5rem;
+    color: var(--gray);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+  tbody td:first-child {
+    border-right: 1px solid var(--info);
+  }
+  thead tr th, thead tr td,
+  tbody tr th, tbody tr td,
+  tfoot tr th, tfoot tr td {
+    border: 0;
+    padding: 1.5rem 0.75rem;
+  }
+  tfoot tr td {
+    border-top: 1px solid var(--info);
+    font-size: 0.87rem;
+    color: var(--gray);
+  }
+  tfoot img {
+    margin-right: 0.25rem;
+  }
+
+  @media only screen and (max-width: 767px) {
+    max-width: 440px;
+    border: 0;
+    margin-bottom: 0;
+
+    thead th:first-child, tbody td:first-child {
+      border-right: 0;
+    }
+
+    tbody tr {
+      display: flex;
+      flex-wrap: wrap;
+
+      > td {
+        width: 50%;
+        padding: 0.75rem;
+      }
+    }
+
+    tfoot {
+      display: none;
+    }
+  }
+}
+
+.first-step-modal--plate {
+  border-radius: 4px;
+  border: 1px solid var(--info);
+  display: inline-flex;
+  align-items: center;
+  padding-right: 0.7rem;
+
+  > img {
+    margin-right: 0.5rem;
   }
 }
 </style>

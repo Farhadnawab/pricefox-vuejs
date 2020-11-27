@@ -4,9 +4,9 @@
       :class="{'is-invalid': isInvalid}" 
       @submit.stop.prevent="onSubmit"
     >
-      <div class="row">
+      <div class="first-step-scenario-b--content row">
       
-        <div class="col-xs-8">
+        <div class="col-sm-8">
           <div class="text-brand-gray">
             <h2 class="mt-0">Καταχώρηση οχήματος</h2>
             <h4 class="font-weight-normal">Χρειαζόμαστε κάποιες πληροφορίες για τον οδηγό και το όχημα και θα βρούμε για σένα τις καλύτερες  προσφορές</h4>
@@ -20,6 +20,8 @@
           <vehicle-detail-fields
             :userVehicle="userVehicle"          
           />
+
+          <br/>
 
           <!-- Vehicle Used -->
           <div class="mt-3" v-if="userVehicle.make.length > 0">
@@ -52,10 +54,19 @@
           </div>
         </div>
 
-        <div class="col-xs-4">
-          <vehicle-review-container
+        <div class="col-sm-4">
+          
+          <!-- Title Section --->
+          <title-section />
+
+          <!-- Vehicle Review -->
+          <vehicle-review-section
             :userVehicle="userVehicle"          
           />
+
+          <!-- Info Sponsors Section -->
+          <info-sponsors-section />
+
         </div>
       </div>
     </form>
@@ -67,7 +78,9 @@ import mixinCommon from '@/helpers/mixinCommon'
 import driverDetailFields from '@/components/steps/common/driverDetailFields.vue';
 import vehicleDetailFields from '@/components/steps/common/vehicleDetailFields.vue';
 import vehicleUsedFields from '@/components/steps/common/vehicleUsedFields.vue';
-import vehicleReviewContainer from '@/components/steps/common/vehicleReviewContainer.vue';
+import vehicleReviewSection from '@/components/steps/common/vehicleReviewSection.vue';
+import titleSection from '@/components/steps/common/titleSection.vue';
+import infoSponsorsSection from '@/components/steps/common/infoSponsorsSection.vue';
 
 export default {
   name: 'firstStepScenarioB',
@@ -75,7 +88,9 @@ export default {
     driverDetailFields, 
     vehicleDetailFields, 
     vehicleUsedFields, 
-    vehicleReviewContainer 
+    vehicleReviewSection,
+    titleSection,
+    infoSponsorsSection
   },
   mixins: [mixinCommon],
   props: {
@@ -137,32 +152,20 @@ export default {
 }
 
 .first-step-scenario-b--action {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 1.875rem;
 
   > .btn {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     text-align: left;
     line-height: 1;
   }
   > .btn:first-child {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
     min-width: 55px;
     margin-right: 0.5rem;
-    -webkit-box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
   }
   > .btn:last-child {
@@ -178,6 +181,18 @@ export default {
   }
   > .btn:last-child svg {
     margin-left: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  
+  .first-step-scenario-b--content {
+    display: flex;
+    flex-direction: column-reverse;
+
+    > .col-sm-4 {
+      margin-bottom: 2rem;
+    }
   }
 }
 </style>

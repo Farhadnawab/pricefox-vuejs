@@ -4,9 +4,9 @@
       :class="{'is-invalid': isInvalid}" 
       @submit.stop.prevent="onSubmit"
     >
-      <div class="row">
+      <div class="first-step-scenario-a--content row">
       
-        <div class="col-xs-8">
+        <div class="col-sm-8">
 
           <div class="text-brand-gray">
             <h2 class="mt-0">Καταχώρηση οχήματος</h2>
@@ -16,30 +16,36 @@
             
             <h2>Στοιχεία οχήματος</h2>
 
-            <table class="first-step-scenario-a--table table">
-              <thead>
-                <tr>
-                  <th width="170" scope="col">Πινακιδα</th>
-                  <th scope="col">Μάρκα</th>
-                  <th scope="col">Μοντελο</th>
-                  <th scope="col">Κυβικα</th>
-                  <th scope="col">Καυσιμο</th>
-                  <th scope="col">Εκδοση</th>
-                </tr>
-              </thead>
+            <table class="first-step-modal--table first-step-scenario-a--table table">
               <tbody>
                 <tr>
                   <td scope="row">
-                    <div class="first-step-scenario-a--plate">
+                    <div class="title">Πινακιδα</div>
+                    <div class="first-step-modal--plate">
                       <img :src="require('@/assets/images/plate.png')" />
                       {{ userVehicle.licensePlate | licensePlateFormat }}
                     </div>
                   </td>
-                  <td>{{ userVehicle.make }}</td>
-                  <td>{{ userVehicle.model }}</td>
-                  <td>{{ userVehicle.cc }}</td>
-                  <td>{{ userVehicle.fuel }}</td>
-                  <td>{{ userVehicle.type }}</td>
+                  <td>
+                    <div class="title">Μάρκα</div>
+                    {{ userVehicle.make }}
+                  </td>
+                  <td>
+                    <div class="title">Μοντελο</div>
+                    {{ userVehicle.model }}
+                  </td>
+                  <td>
+                    <div class="title">Κυβικα</div>
+                    {{ userVehicle.cc }}
+                  </td>
+                  <td>
+                    <div class="title">Καυσιμο</div>
+                    {{ userVehicle.fuel }}
+                  </td>
+                  <td>
+                    <div class="title">Εκδοση</div>
+                    {{ userVehicle.type }}
+                  </td>
                 </tr>
               </tbody>
               <tfoot>
@@ -85,10 +91,19 @@
           </div>
         </div>
         
-        <div class="col-xs-4">
-          <vehicle-review-container
+        <div class="col-sm-4">
+          
+          <!-- Title Section --->
+          <title-section />
+
+          <!-- Vehicle Review -->
+          <vehicle-review-section
             :userVehicle="userVehicle"          
           />
+
+          <!-- Info Sponsors Section -->
+          <info-sponsors-section />
+
         </div>
       </div>
     </form>
@@ -100,14 +115,18 @@ import { mapActions } from 'vuex'
 import mixinCommon from '@/helpers/mixinCommon'
 import driverDetailFields from '@/components/steps/common/driverDetailFields.vue';
 import vehicleUsedFields from '@/components/steps/common/vehicleUsedFields.vue';
-import vehicleReviewContainer from '@/components/steps/common/vehicleReviewContainer.vue';
+import vehicleReviewSection from '@/components/steps/common/vehicleReviewSection.vue';
+import titleSection from '@/components/steps/common/titleSection.vue';
+import infoSponsorsSection from '@/components/steps/common/infoSponsorsSection.vue';
 
 export default {
   name: 'firstStepScenarioA',
   components: { 
     driverDetailFields, 
     vehicleUsedFields,
-    vehicleReviewContainer
+    vehicleReviewSection,
+    titleSection,
+    infoSponsorsSection
   },
   mixins: [mixinCommon],
   props: {
@@ -166,33 +185,13 @@ export default {
 .first-step-scenario-a--table {
   max-width: 685px;
   margin: 0.85rem 0 1.5rem;
-  border: 1px solid var(--info);
-
-  thead th {
-    border-bottom: 0;
-    padding-top: 1.5rem;
-    padding-bottom: 0.375rem;
-    color: var(--gray);
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-  th, td {
-    border: 0;
-    padding: 0.75rem;
-  }
-  tbody tr:first-child td {
-    padding-top: 0.375rem;
-  }
-  tbody tr:last-child td {
-    padding-bottom: 1.5rem;
-  }
-  tfoot tr td {
-    border-top: 1px solid var(--info);
-    font-size: 0.87rem;
-    color: var(--gray);
-  }
+  
   tfoot img {
     margin-right: 0.25rem;
+  }
+
+  @media only screen and (max-width: 767px) {
+    border: 1px solid var(--info);
   }
 }
 
@@ -208,32 +207,20 @@ export default {
 }
 
 .first-step-scenario-a--action {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 1.875rem;
 
   > .btn {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     text-align: left;
     line-height: 1;
   }
   > .btn:first-child {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
     min-width: 55px;
     margin-right: 0.5rem;
-    -webkit-box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
   }
   > .btn:last-child {
@@ -249,6 +236,18 @@ export default {
   }
   > .btn:last-child svg {
     margin-left: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  
+  .first-step-scenario-a--content {
+    display: flex;
+    flex-direction: column-reverse;
+
+    > .col-sm-4 {
+      margin-bottom: 2rem;
+    }
   }
 }
 </style>

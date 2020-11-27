@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vehicle-review-section">
     <div class="panel panel-default">
     <div class="panel-body">
       <h5>Σύνοψη</h5>

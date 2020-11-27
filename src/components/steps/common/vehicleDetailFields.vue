@@ -1,6 +1,6 @@
 <template>
   <div class="vehicle-detail-fields">    
-    <div class="form-group">
+    <div class="form-group vehicle-detail-fields--make">
       <div class="font-weight-medium mb-03">
         Μάρκα
         <img :src="require('@/assets/images/question.svg')" />
@@ -14,6 +14,15 @@
         :options="vehicleMakeOptions"
         @input="populateModelData"
       ></select-field>
+
+      <div class="vehicle-detail-fields--make--hint">
+          <img :src="require('@/assets/images/pointing-arrow2.png')" />
+          <span>
+            Θα χρειαστούμε κάποια απαραίτητα στοιχεία για το όχημα σου.
+            <br/><br/>
+            Θα πάρει μόνο ένα λεπτό και θα δείς τις καλύτερες προσφορές στην αγορά!
+          </span>
+        </div>
     </div>
 
     <template v-if="userVehicle.make.length > 0">
@@ -188,5 +197,36 @@ export default {
 .vehicle-detail-fields {
   margin-top: 1.5rem;
   max-width: 340px;
+}
+
+.vehicle-detail-fields--make {
+  position: relative;
+}
+.vehicle-detail-fields--make--hint {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  margin-top: -6rem;
+  margin-left: 2.5rem;
+  width: 500px;
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    margin-right: 2rem;
+  }
+
+  @media only screen and (max-width: 1340px) {
+    width: 380px;
+    margin-top: -4rem;
+    font-size: 0.875rem;
+
+    img {
+      max-width: 80px;
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    display: none;
+  }
 }
 </style>

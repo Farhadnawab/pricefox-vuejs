@@ -3,7 +3,7 @@
     <div class="driver-detail-fields">
       <h3 class="mb-1">Στοιχεία οδηγού</h3>
 
-      <div class="form-group">
+      <div class="form-group driver-detail-fields--license">
         <div class="font-weight-medium mb-03">
           Ημερομηνία έκδοσης διπλώματος
           <img :src="require('@/assets/images/question.svg')" />
@@ -16,6 +16,13 @@
           v-model="userVehicle.licenseIssuanceDate"
           :required="true"
         ></date-picker>
+
+        <div class="driver-detail-fields--license--hint">
+          <img :src="require('@/assets/images/pointing-arrow1.png')" />
+          <span>
+            Επίσης θα χρειαστούμε κάποιες πληροφορίες για τον οδηγό.
+          </span>
+        </div>
       </div>
 
       <template v-if="userVehicle.licenseIssuanceDate">
@@ -101,7 +108,7 @@
       </template>
     </div>
     <br/>
-    <p class="driver-detail-fields--description">Πατώντας το "Επόμενο Βήμα" συμφωνείτε με τους Όρους χρήσης & Πολιτική Απορρήτου.</p>
+    <p v-if="userVehicle.licenseIssuanceDate" class="driver-detail-fields--description">Πατώντας το "Επόμενο Βήμα" συμφωνείτε με τους Όρους χρήσης & Πολιτική Απορρήτου.</p>
   </div>
 </template>
 
@@ -145,5 +152,36 @@ export default {
 .driver-detail-fields--description {
   color: var(--gray);
   font-size: 0.875rem;
+}
+
+.driver-detail-fields--license {
+  position: relative;
+}
+.driver-detail-fields--license--hint {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  margin-top: -3rem;
+  margin-left: 2.5rem;
+  width: 340px;
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    margin-right: 2rem;
+  }
+
+  @media only screen and (max-width: 1340px) {
+    width: 300px;
+    margin-top: -2rem;
+    font-size: 0.875rem;
+
+    img {
+      max-width: 50px;
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    display: none;
+  }
 }
 </style>

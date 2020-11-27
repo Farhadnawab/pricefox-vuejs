@@ -3,7 +3,7 @@
 
     <!-- Modal -->
     <modal
-      class="save-results"
+      class="first-step-modal-window"
       :hidden="!steps.modalStep1Show"
       :prevent-closing="true"
       v-if="steps.active === 1"
@@ -26,6 +26,7 @@
       v-else
       :steps.sync="steps"
       :userVehicle.sync="userVehicle"
+      :class="{'hidden-xs': steps.modalStep1Show }"
     />
   </div>
 </template>
@@ -76,7 +77,6 @@ export default {
     }
   },
   methods: {
-   
   },
   created() {
     if(this.$route.params.number)
