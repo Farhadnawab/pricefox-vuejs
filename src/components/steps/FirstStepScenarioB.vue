@@ -61,11 +61,14 @@
 
           <!-- Vehicle Review -->
           <vehicle-review-section
-            :userVehicle="userVehicle"          
+            :userVehicle="userVehicle" 
+            class="hidden-xs"         
           />
 
           <!-- Info Sponsors Section -->
-          <info-sponsors-section />
+          <info-sponsors-section 
+            class="hidden-xs"
+          />
 
         </div>
       </div>
